@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useDebounce } from 'use-debounce';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
-import { fetchNotes } from '@/lib/api/clientApi';
+import { fetchNotes } from '@/lib/api';
 import SearchBox from '@/components/SearchBox/SearchBox';
 import NoteList from '@/components/NoteList/NoteList';
 import Pagination from '@/components/Pagination/Pagination';
@@ -13,6 +13,8 @@ import css from './Notes.module.css';
 import type { Note } from '@/types/note';
 import type { Tag } from '@/types/note';
 import Link from 'next/link';
+import { BsWhatsapp } from 'react-icons/bs';
+import { AiOutlineVideoCameraAdd } from 'react-icons/ai';
 
 interface FetchNotesResponse {
   notes: Note[];

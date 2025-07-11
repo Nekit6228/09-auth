@@ -4,7 +4,6 @@ import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
 import { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
-import AuthProvider from '@/components/AuthProvider/AuthProvider';
 
 export const  metadata :Metadata ={
   title:'Notes',
@@ -43,12 +42,10 @@ export default function RootLayout({
     <html lang="en"  className={roboto.variable}>
       <body>
         <TanStackProvider>
-          <AuthProvider>
           <Header />
           {children}
           {modal} 
           <Footer />
-          </AuthProvider>
         </TanStackProvider>
       </body>
     </html>

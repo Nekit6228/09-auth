@@ -1,4 +1,4 @@
-import { fetchNoteById } from '@/lib/api/clientApi';
+import { fetchNoteById } from '@/lib/api';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
