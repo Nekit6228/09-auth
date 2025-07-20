@@ -33,6 +33,7 @@ export async function fetchNoteById(id: string): Promise<Note> {
 }
 
 
+
 // create note 
 export async function createNote(newNote: NewNote): Promise<Note> {
   const { data } = await nextServer.post<Note>('/notes', newNote);

@@ -7,7 +7,8 @@ import css from "./NoteDetails.module.css";
 import Loading from "@/components/Loading/Loading";
 
 export default function NoteDetailsClient() {
-  const { id } = useParams<{ id: string }>();
+  const params = useParams();
+  const id = params.id as string; 
 
   const {
     data: note,
@@ -15,12 +16,11 @@ export default function NoteDetailsClient() {
     error,
   } = useQuery({
     queryKey: ["note", id],
-    queryFn: () => fetchNoteById(+id),
+    queryFn: () => fetchNoteById(String(+id)),
     refetchOnMount: false,
   });
 
-  if (isLoading) return <Loading/>;
-
+  if (isLoading) return <Loading />;
   if (error || !note) return <p>Ups....</p>;
 
   const formattedDate =
