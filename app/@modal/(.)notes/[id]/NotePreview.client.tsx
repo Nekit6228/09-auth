@@ -5,7 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import { fetchNoteById } from '@/lib/api/clientApi';
 import Modal from '@/components/Modal/Modal'; 
 import Loader from '@/app/loading'; 
-import Error from '@/app/notes/filter/[...slug]/error'; 
+import Error from '@/app/(private routes)/notes/filter/[...slug]/error'; 
 import type { Note } from '@/types/note';
 import css from './NotePreview.module.css'; 
 
