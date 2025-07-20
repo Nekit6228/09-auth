@@ -45,7 +45,7 @@ const Profile  = async () =>{
 	   </div>
      <div className={css.avatarWrapper}>
       <Image
-        src="/notehub-og-meta.webp"
+         src={user.avatar || "/notehub-og-meta.webp"}
         alt="User Avatar"
         width={120}
         height={120}

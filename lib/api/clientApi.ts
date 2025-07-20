@@ -27,7 +27,7 @@ export async function fetchNotes(search = '', page = 1, tag?: string): Promise<F
 
 
 // search by id
-export async function fetchNoteById(id: number): Promise<Note> {
+export async function fetchNoteById(id: string): Promise<Note> {
   const { data } = await nextServer.get<Note>(`/notes/${id}`);
   return data;
 }
@@ -41,7 +41,7 @@ export async function createNote(newNote: NewNote): Promise<Note> {
 
 
 // delete note
-export async function deleteNote(noteId: number): Promise<Note> {
+export async function deleteNote(noteId: string): Promise<Note> {
   const { data } = await nextServer.delete<Note>(`/notes/${noteId}`);
   return data;
 }
@@ -49,7 +49,7 @@ export async function deleteNote(noteId: number): Promise<Note> {
 
 // regiter 
 
-export const register = async (data: Register) => {
+export const register = async (data: Register): Promise<User> => {
   const res = await nextServer.post<User>('/auth/register', data);
   return res.data;
 };
@@ -57,7 +57,7 @@ export const register = async (data: Register) => {
 
 // login 
 
-export const login = async (data: LoginRequest) => {
+export const login = async (data: LoginRequest): Promise<User> => {
   const res = await nextServer.post<User>('/auth/login', data);
   return res.data;
 };
@@ -74,7 +74,7 @@ export const checkSession = async () => {
 // get me 
 
 export const getMe = async () => {
-  const { data } = await nextServer.get<User>('/auth/me');
+  const { data } = await nextServer.get<User>('/users/me');
   return data;
 };
 
