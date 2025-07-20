@@ -1,14 +1,20 @@
 import { fetchNoteById } from '@/lib/api/clientApi';
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 
 type Props = {
-  params: { id: string }; 
+  params: Promise<{ id: string }>;
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id } = params;
+  const { id } = await params;
   const note = await fetchNoteById(id);
+
+  if (!note) {
+    return {
+      title: 'Note not found',
+      description: 'This note does not exist.',
+    };
+  }
 
   return {
     title: note.title,
@@ -38,17 +44,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function NotePage({ params }: Props) {
-  const { id } = params;
-  const note = await fetchNoteById(String(id)); 
-
-  if (!note) {
-    notFound();
-  }
+  const { id } = await params;
+  const note = await fetchNoteById(id);
 
   return (
     <div>
       <h1>{note.title}</h1>
-      <p><strong>Tag:</strong>{note.tag}</p>
+      <p><strong>Tag:</strong> {note.tag}</p>
       <p>{note.content}</p>
       <p><small>Created: {new Date(note.createdAt).toLocaleString()}</small></p>
       <p><small>Updated: {new Date(note.updatedAt).toLocaleString()}</small></p>

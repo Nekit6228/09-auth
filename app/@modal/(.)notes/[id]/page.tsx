@@ -14,7 +14,7 @@ export default async function NotePage({ params }: NotePageProps) {
 
   await queryClient.prefetchQuery({
     queryKey: ['note', noteId],
-    queryFn: () => fetchNoteById(noteId),
+    queryFn: () => fetchNoteById(String(noteId)),
   });
 
   return (
