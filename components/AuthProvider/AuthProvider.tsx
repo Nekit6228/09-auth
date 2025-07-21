@@ -10,18 +10,22 @@ type Props = {
 
 const AuthProvider = ({ children }: Props) => {
   const setUser = useAuthStore((state) => state.setUser);
-  const clearIsAuthenticated = useAuthStore((state) => state.clearIsAuthenticated);
+  const clearIsAuthenticated = useAuthStore(
+    (state) => state.clearIsAuthenticated
+  );
 
   useEffect(() => {
     const fetchUser = async () => {
-      const isAuthenticated = await checkSession();
-      if (isAuthenticated) {
+      try {
+        await checkSession();
         const user = await getMe();
         if (user) setUser(user);
-      } else {
+      } catch (error) {
+        console.error('Error during auth check:', error);
         clearIsAuthenticated();
       }
     };
+
     fetchUser();
   }, [setUser, clearIsAuthenticated]);
 
