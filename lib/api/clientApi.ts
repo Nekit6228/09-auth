@@ -1,7 +1,7 @@
 import type { Note, NewNote } from '@/types/note';
 import nextServer from './api';
 import { User } from '@/types/user';
-import { LoginRequest, Register, CheckSession, UserData} from '@/types/Auth'
+import { LoginRequest, Register, UserData} from '@/types/Auth'
 
 export interface FetchNotesResponse {
   notes: Note[];
@@ -66,16 +66,20 @@ export const login = async (data: LoginRequest): Promise<User> => {
 
 // check session 
 
-export const checkSession = async () => {
-  const res = await nextServer.get<CheckSession>('/auth/session');
-  return res.data.success;
+export const checkSession = async (): Promise<boolean> => {
+  try {
+    const { data } = await nextServer.get('/auth/session');
+    return !!data?.user;
+  } catch {
+    return false;
+  }
 };
 
 
 // get me 
 
-export const getMe = async () => {
-  const { data } = await nextServer.get<User>('/users/me');
+export const getMe = async (): Promise<User> => {
+  const { data } = await nextServer.get('/users/me');
   return data;
 };
 

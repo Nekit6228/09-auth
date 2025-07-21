@@ -8,9 +8,6 @@ export type LoginRequest = {
   password: string;
 };
 
-export  type CheckSession = {
-  success: boolean;
-};
 
 export type UserData={
   username: string;
